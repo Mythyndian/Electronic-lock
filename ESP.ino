@@ -48,8 +48,9 @@ void loop() {
   val = digitalRead(inPin);
   //Serial.println(val);
   delay(2000);
+  
   if(val){
-    Serial.println("dupa");
+    Serial.println("test");
     if(client){
       while(client.connected()){
         while(client.available() > 0){
@@ -59,13 +60,17 @@ void loop() {
           }else if(c == clo){
             servo.write(90);
             digitalWrite(outPin, HIGH);
+            delay(1000);
+            digitalWrite(outPin, LOW);
             client.stop();
             val = 0;
+            delay(1000);
           }
           Serial.write(c);
         }
         delay(10);
       }
+      client.stop();
       Serial.println("Client disconnected");
     }
   }else{

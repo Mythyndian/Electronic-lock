@@ -75,30 +75,9 @@ void loop()
       lcd.clear();
       lcd.setCursor(0,0);
       if(!(strncmp(check, password,4))){
-        lcd.clear();
-        lcd.setCursor(0,0);
-        lcd.print("Password correct");
-        delay(2000);
-        lcd.clear();
-        lcd.setCursor(0,0);
-        lcd.print("Authorize via");
-        lcd.setCursor(0,1);
-        lcd.print("application");
-        esp = 1;
-        digitalWrite(outData, HIGH);
-        delay(2000);
+        pass_c();
       }else{
-        lcd.clear();
-        lcd.setCursor(0,0);
-        lcd.print("Password wrong");
-        delay(2000);
-        lcd.clear();
-        lcd.setCursor(0,0);
-        lcd.print("Enter Password");
-        lcd.setCursor(0,0);
-        delay(1000);
-        lcd.clear();
-        j=0;
+        pass_i();
       }
     }
   }
@@ -151,4 +130,32 @@ void denied(){
   delay(1000);
   lcd.clear();
   lcd.print("Wrong card");
+}
+void pass_c(){
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("Password correct");
+  delay(2000);
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("Authorize via");
+  lcd.setCursor(0,1);
+  lcd.print("application");
+  esp = 1;
+  digitalWrite(outData, HIGH);
+  delay(2000);
+}
+
+void pass_i(){
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("Password wrong");
+  delay(2000);
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("Enter Password");
+  lcd.setCursor(0,0);
+  delay(1000);
+  lcd.clear();
+  j=0;
 }
