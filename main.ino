@@ -34,8 +34,10 @@ void setup () {
   lcd.init();
   lcd.backlight();
   lcd.clear();
-  lcd.setCursor(0, 0);
-  lcd.print("Hello");
+  lcd.setCursor(7, 0);
+  lcd.print("3F");
+  lcd.setCursor(6,1);
+  lcd.print("LOCK");
   SPI.begin();
   mfrc522.PCD_Init();
   pinMode(outData, OUTPUT);
@@ -56,6 +58,10 @@ void loop()
         card = 0;
         lcd.clear();
         lcd.setCursor(0,0);
+        lcd.setCursor(7, 0);
+        lcd.print("3F");
+        lcd.setCursor(6,1);
+        lcd.print("LOCK");
         digitalWrite(outData, LOW);
         j = 0;
         esp = 0;
