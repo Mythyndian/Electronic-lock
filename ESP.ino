@@ -10,7 +10,6 @@ const char* password = "516489723"; //Your password
 int inPin = 12; // D6
 int outPin = 14; // D5
 int val = 0;   
-int key = 0;
 char pass = 'o';
 char clo = 'c';
 
@@ -41,43 +40,35 @@ void setup() {
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
   server.begin();
+  digitalWrite(outPin, LOW);
 }
 
 void loop() {
   WiFiClient client = server.available();
   val = digitalRead(inPin);
-  rs();
   //Serial.println(val);
-  delay(1000);
+  delay(2000);
   if(val){
+    Serial.println("dupa");
     if(client){
       while(client.connected()){
         while(client.available() > 0){
           char c = client.read();
           if(c == pass){
-            key = 1;
             servo.write(0);
-          }else if(key == 1 and c == clo){
+          }else if(c == clo){
             servo.write(90);
-            rs();
+            digitalWrite(outPin, HIGH);
             client.stop();
+            val = 0;
           }
           Serial.write(c);
         }
         delay(10);
       }
-      client.stop();
       Serial.println("Client disconnected");
     }
   }else{
     servo.write(90);  
-  }
-}
-
-void rs(){
-  if (val == 0){
-    digitalWrite(outPin, LOW);  
-  }else{
-    digitalWrite(outPin, HIGH);
   }
 }
