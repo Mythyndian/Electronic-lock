@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/authorize_access.dart';
 import 'package:web_socket_channel/io.dart';
+
 class RequestPage extends StatefulWidget {
   @override
   _RequestPageState createState() => _RequestPageState();
 }
 
 class _RequestPageState extends State<RequestPage> {
-  final _channel = IOWebSocketChannel.connect('wss://192.168.0.46:80');
+  final _channel = IOWebSocketChannel.connect('ws://192.168.0.46:80');
 
   void sendMessage(String msg) {
     _channel.sink.add(msg);
