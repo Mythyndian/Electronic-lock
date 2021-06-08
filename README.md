@@ -2,10 +2,6 @@
 
 To unlock a lock first thing to do is bring RFID card near RFID sensor indicated on case of the lock. Next step is provide alphanumeric passcode. Final step is to provide sequrity sequence in mobile application after this steps lock is finally unlocked.
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
 ### Prerequisites
 
 * Flutter
@@ -19,8 +15,8 @@ These instructions will get you a copy of the project up and running on your loc
 
 * Create new Flutter project and copy dart files into lib directory.
 
-* Flash Arduino board with Arduino code. 
-
+* Flash Arduino board with Arduino code.
+* Flash ESP device with ESP code.
 * Don't forget to change IP address in both Arduino and Flutter code.
 
 ## Deployment
