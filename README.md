@@ -8,20 +8,20 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-Flutter
-Android Board
-4 x 4 Keyboard
-LCD Screen 14 x 2
-ESP module
-Android Device or Android Emulator
+* Flutter
+* Android Board
+* 4 x 4 Keyboard
+* LCD Screen 14 x 2
+* ESP module
+* Android Device or Android Emulator
 
 ### Installing
 
-Create new Flutter project and copy dart files into lib directory.
+* Create new Flutter project and copy dart files into lib directory.
 
-Flash Arduino board with Arduino code. 
+* Flash Arduino board with Arduino code. 
 
-Don't forget to change IP address in both Arduino and Flutter code.
+* Don't forget to change IP address in both Arduino and Flutter code.
 
 ## Deployment
 
