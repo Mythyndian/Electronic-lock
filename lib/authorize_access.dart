@@ -37,7 +37,6 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
-
   List<String> currentPin = ['', '', '', ''];
   TextEditingController pinOneController = TextEditingController();
   TextEditingController pinTwoController = TextEditingController();
@@ -235,9 +234,13 @@ class _OtpScreenState extends State<OtpScreen> {
     if (pinIndex == 4) {
       if (provider.code == strPin) {
         this.codeIsCorrect = true;
+        provider.connect();
         provider.sendMessage('y');
+        provider.disconnect();
       } else {
+        provider.connect();
         provider.sendMessage('n');
+        provider.disconnect();
       }
 
       //print(this.codeIsCorrect);

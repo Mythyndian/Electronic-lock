@@ -62,8 +62,9 @@ class _RequestPageState extends State<RequestPage> {
                     child: IconButton(
                         icon: Icon(Icons.refresh),
                         onPressed: () {
+                          codeProvider.connect();
                           codeProvider.sendMessage('?');
-                          dispose();
+                          codeProvider.disconnect();
                         }))
               ],
             ),
@@ -97,9 +98,7 @@ class RequestAlert extends StatefulWidget {
 }
 
 class _RequestAlertState extends State<RequestAlert> {
-  
   String _status;
-  
 
   @override
   Widget build(BuildContext context) {
@@ -133,7 +132,9 @@ class _RequestAlertState extends State<RequestAlert> {
                 ),
                 IconButton(
                     onPressed: () {
+                      codeProvider.connect();
                       codeProvider.sendMessage('close');
+                      codeProvider.disconnect();
                     },
                     icon: Icon(
                       Icons.lock,

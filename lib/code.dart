@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:web_socket_channel/io.dart';
 
 class CodeProvider extends ChangeNotifier {
-  final _channel = IOWebSocketChannel.connect('wss://192.168.0.46:80');
+  IOWebSocketChannel _channel;
   String _code = '';
   String get code => _code;
   set code(String sequence) {
@@ -10,6 +10,10 @@ class CodeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void connect() {
+    _channel = IOWebSocketChannel.connect('wss://192.168.0.46:80');
+  }
+  
   void sendMessage(String msg) {
     _channel.sink.add(msg);
   }
