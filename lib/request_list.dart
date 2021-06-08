@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/authorize_access.dart';
-import 'package:web_socket_channel/io.dart ';
+import 'package:web_socket_channel/io.dart';
 
 class RequestPage extends StatefulWidget {
   @override
@@ -56,12 +56,10 @@ class _RequestPageState extends State<RequestPage> {
               children: [
                 Container(
                     child: IconButton(
-                  icon: Icon(Icons.refresh),
-                  onPressed: () {
-                    sendMessage('?');
-                  },
-                )),
-                Center(child: Text(_status)),
+                        icon: Icon(Icons.refresh),
+                        onPressed: () {
+                          sendMessage('?');
+                        }))
               ],
             ),
             StreamBuilder(
@@ -84,10 +82,28 @@ class _RequestPageState extends State<RequestPage> {
   }
 }
 
-class RequestAlert extends StatelessWidget {
+class RequestAlert extends StatefulWidget {
   //final DateTime date = new DateTime.now();
   final String dataFromArduino;
   RequestAlert({@required this.dataFromArduino});
+
+  @override
+  _RequestAlertState createState() => _RequestAlertState();
+}
+
+class _RequestAlertState extends State<RequestAlert> {
+  final _channel = IOWebSocketChannel.connect('wss://192.168.0.46:80');
+  String _status;
+  void sendMessage(String msg) {
+    _channel.sink.add(msg);
+  }
+
+  @override
+  void dispose() {
+    _channel.sink.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -114,9 +130,14 @@ class RequestAlert extends StatelessWidget {
                       style: TextStyle(color: Colors.white)),
                 ),
                 Text(
-                  '$dataFromArduino',
+                  '${widget.dataFromArduino}',
                   style: TextStyle(color: Colors.white),
-                )
+                ),
+                IconButton(
+                    onPressed: () {
+                      sendMessage('close');
+                    },
+                    icon: Icon(Icons.lock, color: Colors.white,))
               ],
             ),
           ),
