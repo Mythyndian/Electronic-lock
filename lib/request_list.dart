@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/authorize_access.dart';
-import 'package:provider/provider.dart';
 import 'package:web_socket_channel/io.dart';
-
-import 'code.dart';
-
 class RequestPage extends StatefulWidget {
   @override
   _RequestPageState createState() => _RequestPageState();
@@ -12,12 +8,6 @@ class RequestPage extends StatefulWidget {
 
 class _RequestPageState extends State<RequestPage> {
   final _channel = IOWebSocketChannel.connect('wss://192.168.0.46:80');
-  String _status;
-  @override
-  void initState() {
-    super.initState();
-    _status = "";
-  }
 
   void sendMessage(String msg) {
     _channel.sink.add(msg);
@@ -31,7 +21,6 @@ class _RequestPageState extends State<RequestPage> {
 
   @override
   Widget build(BuildContext context) {
-    final CodeProvider codeProvider = Provider.of<CodeProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -62,10 +51,17 @@ class _RequestPageState extends State<RequestPage> {
                     child: IconButton(
                         icon: Icon(Icons.refresh),
                         onPressed: () {
-                          codeProvider.connect();
-                          codeProvider.sendMessage('?');
+                          sendMessage('?');
                           //codeProvider.disconnect();
-                        }))
+                        })),
+                Container(
+                  child: IconButton(
+                    icon: Icon(Icons.lock),
+                    onPressed: () {
+                      sendMessage('close');
+                    },
+                  ),
+                )
               ],
             ),
             StreamBuilder(
@@ -102,7 +98,6 @@ class _RequestAlertState extends State<RequestAlert> {
 
   @override
   Widget build(BuildContext context) {
-    final CodeProvider codeProvider = Provider.of<CodeProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Opacity(
@@ -130,16 +125,6 @@ class _RequestAlertState extends State<RequestAlert> {
                   '${widget.dataFromArduino}',
                   style: TextStyle(color: Colors.white),
                 ),
-                IconButton(
-                    onPressed: () {
-                      //codeProvider.connect();
-                      codeProvider.sendMessage('close');
-                      //codeProvider.disconnect();
-                    },
-                    icon: Icon(
-                      Icons.lock,
-                      color: Colors.white,
-                    ))
               ],
             ),
           ),

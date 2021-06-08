@@ -42,6 +42,8 @@ class _OtpScreenState extends State<OtpScreen> {
   TextEditingController pinTwoController = TextEditingController();
   TextEditingController pinThreeController = TextEditingController();
   TextEditingController pinFourController = TextEditingController();
+  final _channel = IOWebSocketChannel.connect('wss://192.168.0.46:80');
+  
   bool codeIsCorrect = false;
   var outlineInputBorder = OutlineInputBorder(
     borderRadius: BorderRadius.circular(10.0),
@@ -78,6 +80,9 @@ class _OtpScreenState extends State<OtpScreen> {
     );
   }
 
+  void sendMessage(String msg) {
+    _channel.sink.add(msg);
+  }
   buildNumberPad(CodeProvider provider, bool flag) {
     return Expanded(
       child: Container(
@@ -234,13 +239,11 @@ class _OtpScreenState extends State<OtpScreen> {
     if (pinIndex == 4) {
       if (provider.code == strPin) {
         this.codeIsCorrect = true;
-        //provider.connect();
-        provider.sendMessage('y');
-        //provider.disconnect();
+        sendMessage('y');
       } else {
         //provider.connect();
-        provider.sendMessage('n');
-        //provider.disconnect();
+        sendMessage('n');
+
       }
 
       //print(this.codeIsCorrect);
