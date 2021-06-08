@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/authorize_access.dart';
+import 'package:provider/provider.dart';
 import 'package:web_socket_channel/io.dart';
+
+import 'code.dart';
 
 class RequestPage extends StatefulWidget {
   @override
@@ -28,6 +31,7 @@ class _RequestPageState extends State<RequestPage> {
 
   @override
   Widget build(BuildContext context) {
+    final CodeProvider codeProvider = Provider.of<CodeProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -58,7 +62,8 @@ class _RequestPageState extends State<RequestPage> {
                     child: IconButton(
                         icon: Icon(Icons.refresh),
                         onPressed: () {
-                          sendMessage('?');
+                          codeProvider.sendMessage('?');
+                          dispose();
                         }))
               ],
             ),
@@ -92,20 +97,13 @@ class RequestAlert extends StatefulWidget {
 }
 
 class _RequestAlertState extends State<RequestAlert> {
-  final _channel = IOWebSocketChannel.connect('wss://192.168.0.46:80');
+  
   String _status;
-  void sendMessage(String msg) {
-    _channel.sink.add(msg);
-  }
-
-  @override
-  void dispose() {
-    _channel.sink.close();
-    super.dispose();
-  }
+  
 
   @override
   Widget build(BuildContext context) {
+    final CodeProvider codeProvider = Provider.of<CodeProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Opacity(
@@ -135,9 +133,12 @@ class _RequestAlertState extends State<RequestAlert> {
                 ),
                 IconButton(
                     onPressed: () {
-                      sendMessage('close');
+                      codeProvider.sendMessage('close');
                     },
-                    icon: Icon(Icons.lock, color: Colors.white,))
+                    icon: Icon(
+                      Icons.lock,
+                      color: Colors.white,
+                    ))
               ],
             ),
           ),

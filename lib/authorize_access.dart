@@ -37,16 +37,6 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
-  final _channel = IOWebSocketChannel.connect('wss://192.168.0.46:80');
-  void sendMessage(String msg) {
-    _channel.sink.add(msg);
-  }
-
-  @override
-  void dispose() {
-    _channel.sink.close();
-    super.dispose();
-  }
 
   List<String> currentPin = ['', '', '', ''];
   TextEditingController pinOneController = TextEditingController();
@@ -63,7 +53,6 @@ class _OtpScreenState extends State<OtpScreen> {
   @override
   Widget build(BuildContext context) {
     final CodeProvider codeProvider = Provider.of<CodeProvider>(context);
-
     return SafeArea(
       child: Column(
         children: <Widget>[
@@ -246,9 +235,9 @@ class _OtpScreenState extends State<OtpScreen> {
     if (pinIndex == 4) {
       if (provider.code == strPin) {
         this.codeIsCorrect = true;
-        sendMessage('y');
+        provider.sendMessage('y');
       } else {
-        sendMessage('n');
+        provider.sendMessage('n');
       }
 
       //print(this.codeIsCorrect);
