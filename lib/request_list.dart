@@ -64,7 +64,7 @@ class _RequestPageState extends State<RequestPage> {
                         onPressed: () {
                           codeProvider.connect();
                           codeProvider.sendMessage('?');
-                          codeProvider.disconnect();
+                          //codeProvider.disconnect();
                         }))
               ],
             ),
@@ -132,9 +132,9 @@ class _RequestAlertState extends State<RequestAlert> {
                 ),
                 IconButton(
                     onPressed: () {
-                      codeProvider.connect();
+                      //codeProvider.connect();
                       codeProvider.sendMessage('close');
-                      codeProvider.disconnect();
+                      //codeProvider.disconnect();
                     },
                     icon: Icon(
                       Icons.lock,

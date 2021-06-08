@@ -234,13 +234,13 @@ class _OtpScreenState extends State<OtpScreen> {
     if (pinIndex == 4) {
       if (provider.code == strPin) {
         this.codeIsCorrect = true;
-        provider.connect();
+        //provider.connect();
         provider.sendMessage('y');
-        provider.disconnect();
+        //provider.disconnect();
       } else {
-        provider.connect();
+        //provider.connect();
         provider.sendMessage('n');
-        provider.disconnect();
+        //provider.disconnect();
       }
 
       //print(this.codeIsCorrect);
@@ -319,7 +319,7 @@ class _OtpScreenState extends State<OtpScreen> {
                     MaterialPageRoute(
                         builder: (context) => ResultAlert(
                               assetName: 'assets/icon/close.svg',
-                              title: 'Setup fail',
+                              title: 'Access Denied',
                               buttonLink: RequestPage(),
                             )));
               }
