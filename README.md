@@ -35,3 +35,7 @@ To unlock a lock first thing to do is bring RFID card near RFID sensor indicated
 
 * **Maciej Zawistowski** - *Mobile app* - [Mythyndian](https://github.com/Mythyndian)
 * **Jakub Ziemba** - *Embedded code and hardware testing* - [Naffik](https://github.com/Naffik)
+
+## Docummentation
+
+* Mobile app code docummentation - [docs](https://mythyndian.github.io/)
